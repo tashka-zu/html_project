@@ -6,7 +6,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-        with open('src/contacts.html', 'rb') as file:
+        with open('contacts.html', 'rb') as file:
             self.wfile.write(file.read())
 
 def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler, port=8000):
