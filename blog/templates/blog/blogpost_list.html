@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Блог</h1>
+    <a href="{% url 'blog:blogpost_create' %}" class="btn btn-primary mb-3">Создать запись</a>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                {% if post.preview %}
+                <img src="{{ post.preview.url }}" class="card-img-top" alt="{{ post.title }}">
+                {% else %}
+                <img src="https://via.placeholder.com/300" class="card-img-top" alt="No preview">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <a href="{% url 'blog:blogpost_detail' post.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
