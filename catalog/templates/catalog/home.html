@@ -1,17 +1,30 @@
-<!-- catalog/templates/catalog/home.html -->
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Главная</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Добро пожаловать на главную страницу!</h1>
-        <p class="text-center">Это главная страница вашего Django-проекта.</p>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Список товаров</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                <img src="https://via.placeholder.com/300" class="card-img-top" alt="No image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">
+                        {{ product.description|truncatechars:100 }}
+                    </p>
+                    <p class="card-text"><strong>Цена:</strong> {{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}
