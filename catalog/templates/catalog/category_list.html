@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Список категорий</h1>
+    <a href="{% url 'category_create' %}" class="btn btn-success mb-3">Добавить категорию</a>
+    <ul class="list-group">
+        {% for category in categories %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ category.name }}
+            <div>
+                <a href="{% url 'category_edit' category.pk %}" class="btn btn-warning btn-sm">Редактировать</a>
+                <a href="{% url 'category_delete' category.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+            </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">Категорий пока нет.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
