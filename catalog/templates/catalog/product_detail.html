@@ -12,9 +12,9 @@
         </div>
         <div class="col-md-6">
             <h1>{{ product.name }}</h1>
-            <p><strong>Категория:</strong> {{ product.category.name }}</p>
             <p><strong>Цена:</strong> {{ product.price }}</p>
             <p><strong>Описание:</strong> {{ product.description }}</p>
+            <a href="{% url 'product_edit' product.pk %}" class="btn btn-warning">Редактировать</a>
         </div>
     </div>
 </div>
