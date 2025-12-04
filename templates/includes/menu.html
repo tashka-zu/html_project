@@ -22,7 +22,10 @@
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-link btn btn-link" type="submit" style="color: white; text-decoration: none;">Выход</button>
+                     </form>
                 </li>
                 {% else %}
                 <li class="nav-item">
