@@ -1,16 +1,16 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Product, Category
+from .models import Product
 
 class ProductForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = ['name', 'description', 'price', 'image', 'category']
-
     forbidden_words = [
         'казино', 'криптовалюта', 'крипта', 'биржа',
         'дешево', 'бесплатно', 'обман', 'полиция', 'радар'
     ]
+
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'image', 'category', 'status']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -36,9 +36,3 @@ class ProductForm(forms.ModelForm):
         if price < 0:
             raise ValidationError("Цена не может быть отрицательной.")
         return price
-
-
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ['name']

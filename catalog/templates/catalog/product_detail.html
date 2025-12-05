@@ -14,7 +14,11 @@
             <h1>{{ product.name }}</h1>
             <p><strong>Цена:</strong> {{ product.price }}</p>
             <p><strong>Описание:</strong> {{ product.description }}</p>
+            <p><strong>Статус:</strong> {{ product.get_status_display }}</p>
+            {% if request.user == product.owner or perms.catalog.can_unpublish_product %}
             <a href="{% url 'product_edit' product.pk %}" class="btn btn-warning">Редактировать</a>
+            <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
         </div>
     </div>
 </div>
