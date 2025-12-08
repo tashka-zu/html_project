@@ -2,10 +2,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Список товаров</h1>
-    {% if user.is_authenticated %}
-    <a href="{% url 'product_create' %}" class="btn btn-success mb-3">Добавить товар</a>
-    {% endif %}
+    <h1>Продукты в категории: {{ category.name }}</h1>
     <div class="row">
         {% for product in products %}
         <div class="col-md-4 mb-4">
@@ -21,11 +18,7 @@
                         {{ product.description|truncatechars:100 }}
                     </p>
                     <p class="card-text"><strong>Цена:</strong> {{ product.price }}</p>
-                    <p class="card-text"><strong>Статус:</strong> {{ product.get_status_display }}</p>
                     <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Подробнее</a>
-                    {% if request.user == product.owner or perms.catalog.can_unpublish_product %}
-                    <a href="{% url 'product_edit' product.pk %}" class="btn btn-warning">Редактировать</a>
-                    {% endif %}
                 </div>
             </div>
         </div>
